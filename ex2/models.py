@@ -26,12 +26,13 @@ from django.contrib.gis.db import models
 
 class Country(models.Model):
 
-    name = models.CharField('Name', max_length=400)
-    iso2 = models.CharField('ISO 2', max_length=2)
-    iso3 = models.CharField('ISO 3', max_length=3)
-    pop2005 = models.IntegerField('2005 Population', default=0)
+    name = models.CharField('Name', max_length=400, null=True)
+    iso2 = models.CharField('ISO 2', max_length=2, null=True)
+    iso3 = models.CharField('ISO 3', max_length=3, null=True)
+    pop2005 = models.IntegerField('2005 Population', default=0, null=True)
 
-    mpoly = models.MultiPolygonField()
+    #mpoly = models.GeometryField('Multi-polygon', srid=4326, null=True)
+    mpoly = models.MultiPolygonField('Multi-polygon', srid=4326, null=True)
     objects = models.GeoManager()
 
     def __str__(self):
@@ -47,21 +48,26 @@ class Country(models.Model):
 
 class HotSpot(models.Model):
 
-    scan = models.FloatField('Scan')
-    track = models.FloatField('Scan')
-    acq_date = models.DateTimeField(auto_now=True, null=True, blank=True)
-    satellite = models.CharField('Satellite', max_length=1)
+    #id = models.BigIntegerField('ID', primary_key=True)
+    id = models.AutoField('ID', primary_key=True)
+    scan = models.FloatField('Scan', null=True)
+    track = models.FloatField('Track', null=True)
+    acq_date = models.DateField('Acquisition Date', max_length=100, null=True, blank=True)
+    acq_time = models.CharField('Acquisition Time',  max_length=100, null=True, blank=True)
+    satellite = models.CharField('Satellite', max_length=1, null=True)
+    #lon = models.FloatField('Longitude', null=True)
+    #lat = models.FloatField('Latitude', null=True)
 
-    mpoly = models.MultiPolygonField()
+    point = models.PointField('Point', null=True)
     objects = models.GeoManager()
 
     def __str__(self):
-        return self.name
+        return str(self.acq_date)+" "+str(self.acq_time)+"; "+self.satellite
 
     def __unicode__(self):
-        return self.name
+        return str(self.acq_date)+" "+str(self.acq_time)+"; "+self.satellite
 
     class Meta:
-        ordering = ("acq_date","scan","track","satellite")
+        ordering = ("id",)
         verbose_name_plural = _("Hot Spots")
 

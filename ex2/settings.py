@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Imports
 from __future__ import absolute_import
 import os
-from kombu import Queue
-from celery.schedules import crontab
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -44,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.gis',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -56,7 +55,7 @@ INSTALLED_APPS = (
     'corsheaders',
     #'leaflet',
     'jquery',
-
+    'ex2',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -79,8 +78,12 @@ WSGI_APPLICATION = 'ex2.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'ex1',
+        'USER': 'ex1',
+        'PASSWORD': 'ex1',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -103,7 +106,7 @@ USE_TZ = True
 STATIC_ROOT = '/var/www/static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "ex2/static"),
 ]
 #STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.FileSystemFinder',

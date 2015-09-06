@@ -1,5 +1,139 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_head %}
+<style>
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+  .menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
+    .menu-ui a.active {
+      background:#3887BE;
+      color:#FFF;
+      }
+      .menu-ui a.active:hover {
+        background:#3074a4;
+        }
+</style>
+{% endblock %}
+{% block content %}
+<div class="row" style="height: calc(100% - 51px)">
+  <nav id='menu-ui' class='menu-ui'></nav>
+  <div id="map" style="top:0px;left:0px;width:100%;height:100%;"></div>
+  <script>
+
+    var createLink = function(map, layer, label){
+        var link = document.createElement('a');
+        link.href = '#';
+        link.className = 'active';
+        link.innerHTML = label;
+        $(link).data('map', map)
+        $(link).data('layer', layer)
+
+        link.onClick = function(e) {
+            e.preventDefault();
+            e.stopPropogation();
+            var map = $(this).data('map');
+            var layer = $(this).data('layer');
+            if(map.hasLayer(layer))
+            {
+                map.removeLayer(layer);
+                this.className = ''
+            }
+            else
+            {
+                map.addLayer(layer);
+                this.className = 'active';
+            }
+        }
+        return link;
+    }
+
+    var accessToken = 'pk.eyJ1IjoicGF0cmlja2QiLCJhIjoiZDg3MDRhN2MzNmJhN2NhZDZjMDRhZTZiYmM2ZmViZTEifQ.4WuUSAVaWGCOvc9djcptBw';
+    var map = L.map('map').setView([0, 30], 3);
+    var layerswitcher = document.getElementById('menu-ui');
+
+    // Imagery Basemap
+    var url_imagery = 'https://api.mapbox.com/v4/hiu.nbk3c19e/{z}/{x}/{y}.png?access_token=' + accessToken;
+    var layer_mb_satellite = L.tileLayer(url_imagery, {
+      attribution: ''
+    }).addTo(map);
+
+    layerswitcher.appendChild(createLink(map, layer_mb_satellite,'MapBox Satellite'));
+
+    /* Countries Vector Tiles
+    /var url_vt_countries = '/api/vt/countries/{z}/{x}/{y}.json';
+    /var layer_vt_countries = L.TileLayer.MVTSource({
+        url: url_vt_countries,
+        getIDForLayerFeature: function (feature) {
+            return feature.properties.ogc_fid;
+        },
+    }).addTo(map);
+    */
+    /*
+    $.ajax({
+        dataType: "json",
+        url: "{% url 'country_geojson_all' %}",
+        success: function(response) {
+            var countries = L.GeoJson(response, {
+                onEachFeature: function(feature, layer) {
+                    var popupOptions = {maxWidth: 200};
+                    var props = feature.properties;
+                    var popupContent = '<h4><a href="#">'+props.name+'</a></h4><br>ISO Alpha-2: '+props.iso2+'<br>ISO Alpha-3: '+props.iso3+'<br>2005 Population: '+props.pop2005;
+                    layer.bindPopup(popupContent, popupOptions);
+                }
+            });
+            var markers = L.markerClusterGroup();
+            markers.addLayer(countries);
+            countries.addTo(markers);
+        }
+    });
+    */
+
+    $.ajax({
+        dataType: "json",
+        url: "{% url 'hotspot_geojson_all' %}",
+        success: function(response) {
+            var hotspots = L.geoJson(response, {
+                onEachFeature: function(feature, layer) {
+                    var popupOptions = {maxWidth: 200};
+                    //layer.setIcon(productIcon);
+                    var props = feature.properties;
+                    var popupContent = 'ACQ_DATE<br>'+props.acq_date+'<br>ACQ_TIME<br>'+props.acq_time+'<br>Satellite<br>'+props.satellite+'<br>Scan<br>'+props.scan+'<h4><a href="'+props.url+'">Detail Page</a></h4>';
+                    layer.bindPopup(popupContent, popupOptions);
+                }
+            });
+            hotspots.addTo(map);
+        }
+    });
+  </script>
+</div>
+{% endblock %}
 {% block footer %}
 {% endblock %}

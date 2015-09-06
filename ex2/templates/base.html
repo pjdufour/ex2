@@ -10,28 +10,34 @@
     <meta name="google" content="notranslate" />
     <meta http-equiv="Content-Language" content="en_US" />
     <!-- CSS / External-->
-    <link href="{{ STATIC_URL }}/lib/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}/lib/leaflet/1.0.0-b1/leaflet.css" type="text/css" media="all" />
+    <link href="{{ STATIC_URL }}ex2/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}ex2/leaflet/1.0.0-b1/leaflet.css" type="text/css" media="all" />
+    <!--<link rel="stylesheet" href="{{ STATIC_URL }}ex2/leaflet/0.7.3/leaflet.css" type="text/css" media="all" />-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}ex2/leaflet/1.0.0-b1/MarkerCluster.Default.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}ex2/leaflet/1.0.0-b1/MarkerCluster.css" type="text/css" media="all" />
     <!-- CSS / Internal -->
     <!-- JavaScript / External -->	
     <!--<script src="{{ STATIC_URL }}/lib/jquery/1.7.2/jquery-1.7.2.js"></script>-->
-    <script src="{{ STATIC_URL }}/lib/jquery/1.9.1/jquery-1.9.1.js"></script>
-    <script src="{{ STATIC_URL }}/lib/jqueryui/jquery-ui-1.8.14.min.js"></script>
+    <script src="{{ STATIC_URL }}ex2/jquery/1.9.1/jquery-1.9.1.js"></script>
+    <script src="{{ STATIC_URL }}ex2/jqueryui/jquery-ui-1.8.14.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular-route.js"></script>
-    <script src="{{ STATIC_URL }}/lib/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="{{ STATIC_URL }}/lib/leaflet/1.0.0-b1/leaflet.js"></script>
+    <script src="{{ STATIC_URL }}ex2/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}ex2/leaflet/1.0.0-b1/leaflet.js"></script>
+    <!--<script src="{{ STATIC_URL }}ex2/leaflet/1.0.0-b1/leaflet.markercluster.js"></script>-->
+    <!--<script src="{{ STATIC_URL }}ex2/leaflet/0.7.3/leaflet.js"></script>-->
+    <!--<script src="{{ STATIC_URL }}ex2/mvt/mapbox.vector.tile.js"></script>-->
     <!-- JavaScript / Internal -->		
     <script type="text/javascript" language="Javascript">
       var now = new Date();
       var today = new Date(now.getFullYear(),now.getMonth(),now.getDate());
     </script>
-    {% block extra_head %}
     {% endblock %}
+    {% block extra_head %}
     {% endblock %}
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="position:absolute; top:0px; left:0px; right:0px; bottom: 0px;">
     <div class="row" style="height:51px;">
     {% block header %}
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -51,24 +57,22 @@
             <li id="nav_about">
               <a href="{% url 'about' %}">About</a>
             </li>
+            {% endblock %}
+          </ul>
+          <ul class="nav navbar-nav navbar-right" style="min-width:100px">
+            {% if user.is_authenticated %}
             <li id="nav_admin">
               <a href="/admin">Admin</a>
             </li>
-            {% endblock %}
-          </ul>
-          <ul class="nav navbar-nav navbar-right" style="min-width:380px">
-              {% block navbar_right %}
-              {% endblock %}
+            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
     {% endblock header %}
     </div>
-    <div class="row" style="">
     {% block content %}
     {% endblock content %}
-    </div>
     {% block footer %}
     <div class="row" style="background:rgb(252, 252, 252);">
         <div class="col-md-12">
@@ -81,6 +85,5 @@
         <div class="col-md-12"><h6><span style="margin-right:4px;font-weight:bold;">Disclaimer:</span>This site was produced by Patrick Dufour only for demonstration.</h6></div>
     </div>
     {% endblock footer %}
-    <div>
   </body>
 </html>

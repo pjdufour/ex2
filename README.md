@@ -26,13 +26,13 @@ git clone https://github.com/pjdufour/ex2.git ex2.git
 Then, as root, then install python packages with:
 ```
 cd ex2.git
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 ```
 
 Then, update SITEURL (e.g., http://example.com/) in settings.py:
 
 ```
-vim ex2.git/ex2/ex2/settings.py
+vim ex2.git/ex2/settings.py
 ```
 
 Create directory for static files for NGINX and copy over static files.
@@ -48,12 +48,10 @@ The application can be run through the Django built-in development server or Gnu
 
 There is a [supervisord.conf configuration file](https://github.com/pjdufour/ex2/blob/master/supervisord.conf) that should automate some of this process in a full production environment.  It is configured for vagrant, but can be easily configured for other users.
 
-First, as root, clear the RabbitMQ cache of messages with:
-
-Then, prepare the server.
+First prepare the databse.
 
 ```
-cd ex2.git/ittc
+cd ~/ex2.git
 python manage.py syncdb
 ```
 
