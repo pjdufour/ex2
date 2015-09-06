@@ -1,0 +1,12 @@
+httplib2
+django
+django-cors-headers
+Pillow
+gunicorn
+greenlet
+gevent
+geojson
+iso8601
+django-jquery
+pinax-theme-bootstrap
+django_forms_bootstrap
