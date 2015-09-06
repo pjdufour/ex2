@@ -7,13 +7,15 @@ This repository contains a Django server for visualizing MODIS fire hostpost lay
 
 ## Installation
 
-As root (`sudo su -`), execute the following commands:
+Ex2 builds on ex1, as such, please complete the installation instructions for ex1 before continuing, including installing & configuring PostGIS.
+
+https://github.com/pjdufour/ex1#installation
+
+Have you you finished the ex1 installation instructions?  If so, continue.  As root (`sudo su -`), execute the following commands:
 
 ```
 apt-get update
-apt-get install -y curl vim git nginx
-apt-get install -y python-dev python-pip
-apt-get install -y supervisor
+apt-get install -y supervisor nginx
 ```
 
 Then, as ubuntu, clone this repo with commands like the following.

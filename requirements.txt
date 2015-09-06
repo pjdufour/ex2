@@ -10,3 +10,4 @@ iso8601
 django-jquery
 pinax-theme-bootstrap
 django_forms_bootstrap
+geodjango
