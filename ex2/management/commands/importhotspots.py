@@ -42,11 +42,14 @@ class Command(BaseCommand):
                 lyr_ind = i
                 break
 
-        lyr = ds[lyr_ind]
-
         if lyr_ind == -1:
             print "Could not find table in data source"
             return 0
 
-        lm = LayerMapping(HotSpot, ds, HOTSPOT_MAPPING, layer=lyr_ind, encoding='iso-8859-1')
+        lm = LayerMapping(
+            HotSpot,
+            ds,
+            HOTSPOT_MAPPING,
+            layer=lyr_ind,
+            encoding='iso-8859-1')
         lm.save(strict=True, verbose=verbose)

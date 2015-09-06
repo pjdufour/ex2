@@ -1,17 +1,17 @@
-from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from .models import Country
-from . import views 
+from . import views
 
 admin.autodiscover()
 
 urlpatterns = patterns('ex2.views',
     url(r'^$', views.home),
 
-    url(r'^hotspots/(?P<hotspot>[^/]+)$',
-        'hotspot_detail', name='hotspot_detail'),
+    url(
+        r'^hotspots/(?P<hotspot>[^/]+)$',
+        'hotspot_detail',
+        name='hotspot_detail'),
 
     url(r'^api/country/countries.geojson$',
         'country_geojson', name='country_geojson_all'),

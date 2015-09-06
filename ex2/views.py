@@ -76,7 +76,7 @@ def country_geojson(request, iso3=None):
             'geojson',
              qs,
              geometry_field='mpoly',
-             fields=('mpoly','name','iso2','iso3','pop2005',))
+             fields=('mpoly', 'name', 'iso2', 'iso3', 'pop2005',))
 
         return HttpResponse(
             str(country_dict),
@@ -95,7 +95,7 @@ def country_geojson_contains(request, hotspot=None):
             'geojson',
              qs,
              geometry_field='mpoly',
-             fields=('mpoly','name','iso2','iso3','pop2005',))
+             fields=('mpoly', 'name', 'iso2', 'iso3', 'pop2005',))
 
         return HttpResponse(
             str(country_dict),
