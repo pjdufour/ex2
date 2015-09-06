@@ -4,10 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.conf import settings
 
-import StringIO
-from PIL import Image, ImageEnhance
-
 from .models import Country, HotSpot
+
 
 def about(request, template="about.html"):
     ctx = {

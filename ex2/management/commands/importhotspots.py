@@ -1,11 +1,10 @@
 from django.contrib.gis.utils import LayerMapping
 from django.core.management.base import BaseCommand
 from optparse import make_option
-import traceback
-import datetime
 
 from ex2.enumerations import HOTSPOT_MAPPING
-from ex2.models import Country, HotSpot
+from ex2.models import HotSpot
+
 
 class Command(BaseCommand):
 

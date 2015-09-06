@@ -53,7 +53,6 @@ INSTALLED_APPS = (
     'django_forms_bootstrap',
 
     'corsheaders',
-    #'leaflet',
     'jquery',
     'ex2',
 )
@@ -71,7 +70,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'ex2.urls'
 
 WSGI_APPLICATION = 'ex2.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -100,29 +98,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-#STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
 STATIC_ROOT = '/var/www/static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "ex2/static"),
 ]
-#STATICFILES_FINDERS = (
-#    'django.contrib.staticfiles.finders.FileSystemFinder',
-#    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#)
-
-#LEAFLET_CONFIG = {
-#    'TILES': [
-#        # Find tiles at:
-#        # http://leaflet-extras.github.io/leaflet-providers/preview/
-#
-#        ('OpenStreetMap',
-#         'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
-#         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'),
-#    ]
-#}
 
 SITEURL = "http://localhost:8000/"
 
