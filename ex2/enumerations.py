@@ -1,9 +1,9 @@
 COUNTRY_MAPPING = {
-    'name' : 'name',
-    'iso2' : 'iso2',
-    'iso3' : 'iso3',
-    'pop2005' : 'pop2005',
-    'mpoly' : 'MULTIPOLYGON'
+    'name': 'name',
+    'iso2': 'iso2',
+    'iso3': 'iso3',
+    'pop2005': 'pop2005',
+    'mpoly': 'MULTIPOLYGON'
 }
 HOTSPOT_MAPPING = {
     'scan': 'scan',
@@ -11,7 +11,5 @@ HOTSPOT_MAPPING = {
     'acq_date': 'acq_date',
     'acq_time': 'acq_time',
     'satellite': 'satellite',
-#    'lon': 'LON',
-#    'lat': 'LAT',
     'point': 'POINT'
 }

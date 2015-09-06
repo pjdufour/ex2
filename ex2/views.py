@@ -1,29 +1,13 @@
-import json, os, datetime
-
 from django.core.serializers import serialize
-from django.shortcuts import render_to_response, get_object_or_404, render
-from django.template.loader import render_to_string
+from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import RequestContext, loader
-from django.utils.translation import ugettext as _
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.template import RequestContext
 from django.conf import settings
-from django.core.urlresolvers import reverse
-from django.core.exceptions import PermissionDenied
-from django.core.cache import cache, caches, get_cache
 
 import StringIO
 from PIL import Image, ImageEnhance
 
 from .models import Country, HotSpot
-
-import json
-#from bson.json_util import dumps
-
-from geojson import Polygon, Feature, FeatureCollection, GeometryCollection
-
-import time
 
 def about(request, template="about.html"):
     ctx = {
