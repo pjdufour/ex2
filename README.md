@@ -57,6 +57,10 @@ python manage.py syncdb
 
 If `syncdb` asks if you would like to create an admin user, do it. 
 
+This server is configured to access the same database as setup in [Exercise 1](https://github.com/pjdfour/ex1).
+
+You'll need to one `python manage.py importcountrydata.py --source country` once `ex1-init-countries.sh` is run in exercise 1.  Every 24 hours, you'll need to run `python manage.py importhotspotdata.py --source hotspot` if you want to pull in the latest fire data.
+
 To run the application using the Django built-in development server, execute the following:
 
 ```
